@@ -1,0 +1,16 @@
+#- name: disable selinux
+#  shell: setenforce 0
+- name: disable selinux forever
+  copy: src=selinux dest=/etc/selinux/config
+
+- name: disable firewalld on CentOS7
+  service: name=firewalld enabled=no state=stopped
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+
+- name: install iptables on CentOS7
+  yum: name=iptables-services state=latest
+  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
+
+- name: disable iptables
+  shell:  iptables -F
+  

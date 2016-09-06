@@ -1,0 +1,8 @@
+- name: install Development Tools
+  yum: name={{ item }} state=installed
+  tags:
+    - INSTALL
+  with_items:
+    - '@"Development Tools"'
+    - "vim"
+    - "@Base"
