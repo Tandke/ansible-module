@@ -1,1 +1,3 @@
 # ansible-module
+
+ansible一些常用的自动配置模块，包括初始化CentOS操作系统及分布式文件系统MFS的自动化配置
