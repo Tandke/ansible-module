@@ -6,8 +6,8 @@
 - include: yum.yml
 - include: firewall.yml
 - include: ntp.yml
-- include: zabbix_agent.yml
 - include: pkg.yml
+- include: zabbix_agent.yml
 #- include: snmp.yml
 #- include: nrpe.yml
   

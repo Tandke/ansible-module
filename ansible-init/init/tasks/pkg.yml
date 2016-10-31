@@ -6,3 +6,5 @@
     - '@"Development Tools"'
     - "vim"
     - "@Base"
+    - "iotop"
+    - "iftop"
