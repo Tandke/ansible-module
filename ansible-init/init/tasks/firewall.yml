@@ -1,5 +1,9 @@
-#- name: disable selinux
-#  shell: setenforce 0
+- shell: getenforce      
+  register: switch   
+  
+- shell: setenfoce 0      
+  when: switch.stdout != "Disabled"
+
 - name: disable selinux forever
   copy: src=selinux dest=/etc/selinux/config
 
