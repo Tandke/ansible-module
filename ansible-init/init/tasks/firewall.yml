@@ -1,7 +1,7 @@
 - shell: getenforce      
   register: switch   
   
-- shell: setenfoce 0      
+- shell: setenforce 0      
   when: switch.stdout != "Disabled"
 
 - name: disable selinux forever
