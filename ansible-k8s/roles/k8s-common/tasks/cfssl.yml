@@ -1,0 +1,8 @@
+- name: cp cfssl-certinfo to /opt/kubernetes/bin/
+  copy: src=cfssl/cfssl-certinfo dest=/opt/kubernetes/bin/cfssl-certinfo owner=root group=root mode=0755
+
+- name: cp cfssljson to /opt/kubernetes/bin/
+  copy: src=cfssl/cfssljson dest=/opt/kubernetes/bin/cfssljson owner=root group=root mode=0755
+
+- name: cp cfssl to /opt/kubernetes/bin/
+  copy: src=cfssl/cfssl dest=/opt/kubernetes/bin/cfssl owner=root group=root mode=0755

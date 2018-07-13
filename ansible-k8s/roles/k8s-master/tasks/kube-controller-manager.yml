@@ -1,0 +1,28 @@
+- name: cp kube-controller-manager bin file to /opt/kubernetes/bin
+  copy:
+    src: kube-controller-manager
+    dest: /opt/kubernetes/bin/kube-controller-manager
+    owner: root
+    group: root
+    mode: 0755
+
+- name: cp kube-controller-manager.service to /lib/systemd/system
+  template: 
+    src: kube-controller-manager/kube-controller-manager.service.j2
+    dest: /lib/systemd/system/kube-controller-manager.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart kube-controller-manager
+
+#- name: daemon reload
+#  command: systemctl daemon-reload
+
+- name: start kube-controller-manager
+  service: 
+    name: kube-controller-manager
+    state: started
+    enabled: yes
+    daemon_reload: yes
+
+

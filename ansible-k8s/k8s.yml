@@ -1,0 +1,7 @@
+- hosts: k8s-master
+  roles:
+    - docker
+    - etcd
+    - k8s-common
+    - k8s-master
+    - k8s-node
