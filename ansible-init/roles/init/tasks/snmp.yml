@@ -1,7 +1,7 @@
 ---
 
 - name: install net-snmp
-  yum: name=net-snmp state=installed
+  yum: name=net-snmp state=present
   tags: 
     - snmp
       

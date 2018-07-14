@@ -1,6 +1,14 @@
 ---
+- name: ensure Shanghai time
+  copy:
+    src: Shanghai
+    dest: /etc/localtime
+    owner: root
+    group: root
+    mode: 0644
+    
 - name: install ntpdate
-  yum: name=ntpdate state=installed
+  package: name=ntpdate state=present
   notify: 
     - sync time
 

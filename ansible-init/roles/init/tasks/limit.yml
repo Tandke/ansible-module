@@ -1,12 +1,37 @@
 ---
 - name: adjust history
-  shell: echo 'export HISTTIMEFORMAT="%F %T `whoami` "' >> /etc/profile
+  lineinfile:
+    dest: /etc/profile
+    line: 'export HISTTIMEFORMAT="%F %T `whoami` "'
+
+- name: change file descriptors in /etc/profile
+  lineinfile:
+    dest: /etc/profile
+    line: 'ulimit -SHn 65535'
+
+- name: change coredump file size in /etc/profile
+  lineinfile:
+    dest: /etc/profile
+    line: 'ulimit – c unlimited'
 
 - name: change limits.conf
-  copy: src=limits.conf dest=/etc/security/limits.conf owner=root group=root mode=644
+  template: 
+    src: limits.conf.j2
+    dest: /etc/security/limits.conf 
+    owner: root 
+    group: root 
+    mode: 0644
 
 - name: change 90-nproc.conf
-  copy: src=90-nproc.conf dest=/etc/security/limits.d/90-nproc.conf owner=root group=root mode=644
+  template: 
+    src: 90-nproc.conf.j2 
+    dest: /etc/security/limits.d/90-nproc.conf 
+    owner: root 
+    group: root 
+    mode: 0644
 
-- name: chnage file descriptors
+- name: change file descriptors
   shell: ulimit -SHn 65535
+
+  #- name: change coredump file size
+  #shell: ulimit –c unlimited

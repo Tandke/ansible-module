@@ -1,25 +1,36 @@
 - shell: getenforce      
-  register: switch   
+  register: result
+  when: ansible_distribution == "CentOS"
   
-- shell: setenforce 0      
-  when: switch.stdout != "Disabled"
+- shell: setenforce 0
+  when: ansible_distribution == "CentOS" and result.stdout != "Disabled"
+
+- name: check /etc/selinux/config exist
+  stat:
+    path: /etc/selinux/config
+  register: file_exist
 
 - name: disable selinux forever
-  copy: src=selinux dest=/etc/selinux/config
+  lineinfile:
+    dest: /etc/selinux/config
+    regexp: '^SELINUX='
+    line: 'SELINUX=disabled'
+  when: file_exist.stat.exists == true
 
-- shell: systemctl status firewall
-  register: firewall_status
-  ignore_errors: yes
+- name: disable firewalld
+  service: 
+    name: firewalld
+    state: stopped
+    enabled: no
+  ignore_errors: True
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
-
-- name: disable firewalld on CentOS7
-  service: name=firewalld enabled=no state=stopped
-  when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7" and firewall_status.rc == 0
 
 - name: install iptables on CentOS7
-  yum: name=iptables-services state=latest
+  package: 
+    name: iptables-services 
+    state: present
   when: ansible_distribution == "CentOS" and ansible_distribution_major_version == "7"
 
-- name: disable iptables
+- name: flush iptables
   shell:  iptables -F
   

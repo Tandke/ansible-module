@@ -3,6 +3,5 @@
 ntp_server: ntp1.aliyun.com
 dns1: 223.5.5.5
 dns2: 223.6.6.6
-zabbix_server: 10.5.12.1
-nagios_server: 10.5.12.1
-snmp_server: 10.5.12.1
+#zabbix_server: 10.5.12.1
+#snmp_server: 10.5.12.1

@@ -1,10 +1,127 @@
 - name: install Development Tools
-  yum: name={{ item }} state=installed
-  tags:
-    - INSTALL
+  package: name={{ item }} state=present
   with_items:
-    - '@"Development Tools"'
-    - "vim"
-    - "@Base"
-    - "iotop"
-    - "iftop"
+    - autoconf
+    - automake
+    - bc
+    - bzip2
+    - bzip2-devel
+    - bison
+    - cmake
+    - crontabs
+    - dstat
+    - freetype-devel
+    - fuse
+    - fuse-devel
+    - fuse-libs
+    - gcc
+    - gcc-c++
+    - gd-devel
+    - gdb
+    - GeoIP
+    - GeoIP-devel
+    - glib2
+    - glib2-devel
+    - graphviz
+    - graphviz-devel
+    - hiredis
+    - hiredis-devel
+    - libcurl
+    - libcurl-devel
+    - libevent-devel
+    - libjpeg-turbo
+    - libjpeg-turbo-devel
+    - libpng-static
+    - libmcrypt
+    - libmcrypt-devel
+    - libtidy
+    - libtidy-devel
+    - libxml2
+    - libxml2-devel
+    - logwatch
+    - make
+    - man-db
+    - mhash
+    - mhash-devel
+    - ncurses
+    - ncurses-devel
+    - net-tools
+    - ntsysv
+    - numactl
+    - openldap-devel
+    - openssh-clients
+    - openssl-devel
+    - pcre-devel
+    - readline-devel
+    - screen 
+    - sendmail 
+    - setuptool 
+    - unzip 
+    - vim-common 
+    - vim-enhanced 
+    - wget 
+    - zip 
+    - mtr 
+    - nload 
+    - lrzsz 
+    - iotop 
+    - dmidecode 
+    - tree 
+    - telnet 
+    - ImageMagick-devel 
+    - zlib-devel 
+    - rpcbind 
+    - nfs-utils 
+    - python-setuptools 
+    - python-devel
+    - iftop
+    #- '@"Development Tools"'
+    #- "@Base"
+  when: ansible_distribution == "CentOS"
+
+- name: install Development Tools
+  package: name={{ item }} state=present
+  with_items:
+    - python-pip
+    - socat
+    - libcurl4-nss-dev
+    - nfs-common
+    - python-dev
+    - python-setuptools
+    - iotop
+    - build-essential
+    - libssl-dev
+    - vim
+    - make
+    - gdb
+    - libgcc1
+    - telnet
+    - zlib1g-dev
+    - rpcbind
+    - lrzsz
+    - mtr-tiny
+    - dmidecode 
+    - zip
+    - unzip
+    - wget
+    - screen
+    - autoconf
+    - automake
+    - bc
+    - bzip2
+    - bison
+    - cmake
+    - libfreetype6-dev
+    - fuse
+    - libfuse-dev
+    - libgeoip-dev
+    - libglib2.0-0
+    - libglib2.0-dev
+    - libncurses5
+    - libncurses5-dev
+    - libpcre3
+    - libpcre3-dev
+    - libreadline-dev
+  when: ansible_distribution == "Ubuntu"
+  
+

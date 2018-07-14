@@ -1,8 +1,31 @@
 ---
-- name: config dns
-  template: src=resolv.conf.j2 dest=/etc/resolv.conf owner=root group=root mode=644
-  when: ansible_distribution == "CentOS"
+- name: set /etc/resolv.conf
+  template: 
+    src: resolv.conf.j2 
+    dest: /etc/resolv.conf 
+    owner: root 
+    group: root 
+    mode: 0644
+#  when: ansible_distribution == "CentOS"
 
+- name: ensure /etc/resolvconf/resolv.conf.d/base directory for ubuntu 16.04
+  file: 
+    path: /etc/resolvconf/resolv.conf.d/base
+    state: directory
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "16" 
+
+- name: config dns for ubuntu 16.04
+  template: 
+    src: resolv.conf.j2
+    dest: /etc/resolvconf/resolv.conf.d/base
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "16" 
+
+- name: config dns for ubuntu 18.04
+  lineinfile:
+    dest: /etc/systemd/resolved.conf
+    regexp: '^#DNS='
+    line: "DNS={{ dns1 }} {{ dns2 }}"
+  notify: restart systemd-resolved
 
 
 
