@@ -1,0 +1,14 @@
+---
+# handlers file for base2
+#
+- name: sync time
+  shell: ntpdate {{ ntp_server }}
+
+- name: start zabbix agent
+  service: name=zabbix-agent state=restarted enabled=yes
+
+- name: restart snmp
+  service: name=snmpd state=restarted  enabled=yes
+
+- name: restart nrpe
+  service: name=nrpe state=restarted enabled=yes
