@@ -1,9 +1,0 @@
----
-- name: install ntpdate
-  yum: name=ntpdate state=installed
-  notify: 
-    - sync time
-
-- name: sync time
-  cron: name="sync time" minute="*/5" user="root" job="ntpdate {{ ntp_server }} >> /root/Systime"
-
