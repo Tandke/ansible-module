@@ -74,6 +74,7 @@
     - nfs-utils 
     - python-setuptools 
     - python-devel
+    - git
     - iftop
     #- '@"Development Tools"'
     #- "@Base"
@@ -122,6 +123,7 @@
     - libpcre3
     - libpcre3-dev
     - libreadline-dev
+    - git
     - net-tools
   when: ansible_distribution == "Ubuntu"
   
