@@ -122,6 +122,7 @@
     - libpcre3
     - libpcre3-dev
     - libreadline-dev
+    - net-tools
   when: ansible_distribution == "Ubuntu"
   
 

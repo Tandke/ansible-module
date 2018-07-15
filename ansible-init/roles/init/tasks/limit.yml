@@ -12,7 +12,7 @@
 - name: change coredump file size in /etc/profile
   lineinfile:
     dest: /etc/profile
-    line: 'ulimit – c unlimited'
+    line: 'ulimit –c unlimited'
 
 - name: change limits.conf
   template: 
