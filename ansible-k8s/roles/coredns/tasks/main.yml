@@ -1,0 +1,34 @@
+---
+# tasks file for /home/yanwei/workspace/ansible-module/ansible-k8s/roles/coredns
+- name: install coredns
+  copy: 
+    src: coredns
+    dest: /opt/kubernetes/bin/coredns
+    owner: root
+    group: root
+    mode: 0755
+  
+- name: coredns config file
+  template:
+    src: Corefile.j2
+    dest: /opt/kubernetes/cfg/Corefile
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart coredns
+
+- name: coredns service file
+  template:
+    src: coredns.service.j2
+    dest: /lib/systemd/system/coredns.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart coredns
+
+- name: start coredns
+  service:
+    name: coredns
+    state: started
+    enabled: yes
+    daemon_reload: yes

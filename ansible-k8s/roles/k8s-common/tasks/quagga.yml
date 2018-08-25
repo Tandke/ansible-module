@@ -16,9 +16,9 @@
   template: src=quagga/ospfd.conf.j2 dest=/etc/quagga/ospfd.conf owner=root group=root mode=0644
   notify: restart quagga
 
-- name: cp quagga to /etc/init.d
-  template: src=quagga/quagga.j2 dest=/etc/init.d/quagga owern=root group=root mode=0755
-  notify: restart quagga
+# - name: cp quagga to /etc/init.d
+#   template: src=quagga/quagga.j2 dest=/etc/init.d/quagga owern=root group=root mode=0755
+#   notify: restart quagga
 
 #- name: daemon-reload
 #  command: systemctl daemon-reload
