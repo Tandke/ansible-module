@@ -277,6 +277,13 @@ net.ipv4.tcp_congestion_control=${CONGESTION_CONTROL}
 #net.nf_conntrack_max = 6553600
 # net.netfilter.nf_conntrack_tcp_timeout_established = 20
 
+kernel.yama.ptrace_scope = 0
+
+kernel.yama.ptrace_scope=0
+
+vm.dirty_background_ratio = 5
+vm.dirty_ratio = 10
+
 EOF
 
 SAVEIFS=$IFS
