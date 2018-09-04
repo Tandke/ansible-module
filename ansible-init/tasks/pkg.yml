@@ -75,6 +75,7 @@
     - python-setuptools 
     - python-devel
     - iftop
+    - sysstat
     #- '@"Development Tools"'
     #- "@Base"
   when: ansible_distribution == "CentOS"
@@ -122,6 +123,7 @@
     - libpcre3
     - libpcre3-dev
     - libreadline-dev
+    - sysstat
   when: ansible_distribution == "Ubuntu"
   
 
