@@ -279,8 +279,6 @@ net.ipv4.tcp_congestion_control=${CONGESTION_CONTROL}
 
 kernel.yama.ptrace_scope = 0
 
-kernel.yama.ptrace_scope=0
-
 vm.dirty_background_ratio = 5
 vm.dirty_ratio = 10
 
