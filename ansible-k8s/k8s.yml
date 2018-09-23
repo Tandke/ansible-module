@@ -2,6 +2,7 @@
   roles:
     - docker
     - etcd
+    - quagga
     - k8s-common
     - k8s-master
     - k8s-node
