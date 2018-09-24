@@ -2,7 +2,7 @@
 AREA: 0
 
 # 是否启用etcd cluster
-ETCD_CLUSTER: False
+ETCD_CLUSTER: True
 
 # 用于kubelet认证的token
 BOOTSTRAP_TOKEN: "bbbf0533ac5cb878707738b92c3360e9"
@@ -17,7 +17,7 @@ ETCD_CLUSTER_CONF: "etcd-node1=http://10.1.61.175:2380,etcd-node2=http://10.1.61
 FLANNEL_BACKEND_TYPE: "host-gw"
 
 # 指定Pod ip地址段，使用Flannel作为网络插件的时候有用
-# POD_CIDR: 10.253.0.0/16
+POD_CIDR: 10.253.0.0/16
 
 # kubernetes node port的范围
 NODE_PORT_RANGE: "20000-40000"

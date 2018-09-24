@@ -1,2 +1,0 @@
-- name: restart mfsmetalogger
-  service: name=mfsmetalogger state=restarted

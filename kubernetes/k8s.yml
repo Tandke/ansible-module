@@ -1,14 +1,12 @@
-- hosts: etcd
+- hosts: k8s-etcd
   roles:
     - /etc/ansible/roles/kubernetes/etcd
 
 - hosts: k8s-master
   roles:
     - /etc/ansible/roles/kubernetes/docker
-    - /etc/ansible/roles/kubernetes/flannel
     - /etc/ansible/roles/kubernetes/k8s-common
     - /etc/ansible/roles/kubernetes/k8s-master
-    - /etc/ansible/roles/kubernetes/k8s-node
 
 - hosts: k8s-node
   roles:

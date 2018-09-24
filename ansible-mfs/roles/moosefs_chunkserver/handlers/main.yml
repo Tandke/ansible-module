@@ -1,2 +1,0 @@
-- name: restart mfschunkserver
-  service: name=mfschunkserver state=restarted

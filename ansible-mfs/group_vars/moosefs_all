@@ -1,7 +1,0 @@
-moosefs:
-  master: 10.5.12.1
-  httpd_port: 9480
-  mfshdd:
-    - /data
-  mfsmount:
-    - /mdata
