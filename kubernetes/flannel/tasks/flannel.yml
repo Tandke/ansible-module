@@ -14,7 +14,6 @@
 #    owner: root
 #    group: root
 #    mode: 0755
-
 #- name: install mk-docker-opts.sh
 #  file:
 #    src: mk-docker-opts.sh
