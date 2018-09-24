@@ -1,26 +1,26 @@
-- name: Download flanneld
-  get_url:
-    url: https://github.com/coreos/flannel/releases/download/{{ FLANNEL_VERSION}}/flannel-{{ FLANNEL_VERSION}}-linux-amd64.tar.gz
-    dest: /tmp/flannel-{{ FLANNEL_VERSION }}-linux-amd64.tar.gz
-- name: install flanneld
-  shell:
-    tar xf /tmp/flannel-{{ FLANNEL_VERSION}}-linux-amd64.tar.gz -C /usr/local/bin/
-    && rm -f /tmp/flannel-{{ FLANNEL_VERSION }}-linux-amd64.tar.gz
-
+#- name: Download flanneld
+#  get_url:
+#    url: https://github.com/coreos/flannel/releases/download/{{ FLANNEL_VERSION}}/flannel-{{ FLANNEL_VERSION}}-linux-amd64.tar.gz
+#    dest: /tmp/flannel-{{ FLANNEL_VERSION }}-linux-amd64.tar.gz
 #- name: install flanneld
-#  file:
-#    src: flanneld
-#    dest: /usr/local/bin/flanneld
-#    owner: root
-#    group: root
-#    mode: 0755
-#- name: install mk-docker-opts.sh
-#  file:
-#    src: mk-docker-opts.sh
-#    dest: /usr/local/bin/mk-docker-opts.sh
-#    owner: root
-#    group: root
-#    mode: 0755
+#  shell:
+#    tar xf /tmp/flannel-{{ FLANNEL_VERSION}}-linux-amd64.tar.gz -C /usr/local/bin/
+#    && rm -f /tmp/flannel-{{ FLANNEL_VERSION }}-linux-amd64.tar.gz
+#
+- name: install flanneld
+  file:
+    src: flannel/flanneld
+    dest: /usr/local/bin/flanneld
+    owner: root
+    group: root
+    mode: 0755
+- name: install mk-docker-opts.sh
+  file:
+    src: flannel/mk-docker-opts.sh
+    dest: /usr/local/bin/mk-docker-opts.sh
+    owner: root
+    group: root
+    mode: 0755
 
 
 - name: cp flannel-etcd.sh to /usr/local/bin

@@ -13,11 +13,14 @@ ETCD_ENDPOINTS: "http://10.1.61.175:2379,http://10.1.61.176:2379,http://10.1.61.
 # etcd 集群初始化列表
 ETCD_CLUSTER_CONF: "etcd-node1=http://10.1.61.175:2380,etcd-node2=http://10.1.61.176:2380,etcd-node3=http://10.1.61.177:2380"
 
+# flannel版本号
+FLANNEL_VERSION: "v0.10.0"
+
 # flannel使用的backend type
 FLANNEL_BACKEND_TYPE: "host-gw"
 
 # 指定Pod ip地址段，使用Flannel作为网络插件的时候有用
-POD_CIDR: 10.253.0.0/16
+POD_CIDR: "10.253.0.0/16"
 
 # kubernetes node port的范围
 NODE_PORT_RANGE: "20000-40000"
