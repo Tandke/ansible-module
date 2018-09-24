@@ -26,6 +26,7 @@
     regexp: '^#DNS='
     line: "DNS={{ dns1 }} {{ dns2 }}"
   notify: restart systemd-resolved
+  when: ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "18" 
 
 
 
