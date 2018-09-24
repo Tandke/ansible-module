@@ -1,5 +1,5 @@
 {
-  "bip": "{{ DOCKER_BIP }}",
+  "bip": "{{ DOCKER_BIP default(172.17.0.1/24) }}",
   "registry-mirrors": ["https://o0o4czij.mirror.aliyuncs.com"],
   "ip-masq": {{ DOCKER_IP_MASQ |default(true) }},
   "log-driver": "journald"
