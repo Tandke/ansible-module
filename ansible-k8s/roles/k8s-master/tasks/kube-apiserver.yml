@@ -2,40 +2,40 @@
 #  set_fact:
 #    NODE_IP="{{ ansible_default_ipv4.address }}"
 
-- name: cp kubernetes-csr.json to /opt/kubernetes/ssl
+- name: cp kubernetes-csr.json to /etc/kubernetes/ssl
   template:
     src: kube-apiserver/kubernetes-csr.json.j2
-    dest: /opt/kubernetes/ssl/kubernetes-csr.json
+    dest: /etc/kubernetes/ssl/kubernetes-csr.json
     owner: root
     group: root
     mode: 0644
 
 - name: generate kubernetes.pem and kubernetes-key.pem
-  shell: /opt/kubernetes/bin/cfssl gencert -ca=/opt/kubernetes/ssl/ca.pem -ca-key=/opt/kubernetes/ssl/ca-key.pem -config=/opt/kubernetes/ssl/ca-config.json -profile=kubernetes kubernetes-csr.json | /opt/kubernetes/bin/cfssljson -bare kubernetes
+  shell: /usr/local/bin/cfssl gencert -ca=/etc/kubernetes/ssl/ca.pem -ca-key=/etc/kubernetes/ssl/ca-key.pem -config=/etc/kubernetes/ssl/ca-config.json -profile=kubernetes kubernetes-csr.json | /usr/local/bin/cfssljson -bare kubernetes
   args:
-    chdir: /opt/kubernetes/ssl
-    creates: /opt/kubernetes/ssl/kubernetes.pem
+    chdir: /etc/kubernetes/ssl
+    creates: /etc/kubernetes/ssl/kubernetes.pem
 
-- name: cp bootstrap-token.csv to /opt/kubernetes/ssl
+- name: cp bootstrap-token.csv to /etc/kubernetes/ssl
   template:
     src: kube-apiserver/bootstrap-token.csv.j2 
-    dest: /opt/kubernetes/ssl/bootstrap-token.csv
+    dest: /etc/kubernetes/ssl/bootstrap-token.csv
     owner: root
     group: root
     mode: 0644
 
-- name: cp basic auth file to /opt/kubernetes/ssl
+- name: cp basic auth file to /etc/kubernetes/ssl
   template:
     src: kube-apiserver/basic-auth.csv.j2
-    dest: /opt/kubernetes/ssl/basic-auth.csv
+    dest: /etc/kubernetes/ssl/basic-auth.csv
     owner: root
     group: root
     mode: 0644
 
-- name: cp kube-apiserver bin to /opt/kubernetes/bin
+- name: cp kube-apiserver bin to /usr/local/bin
   copy:
     src: kube-apiserver
-    dest: /opt/kubernetes/bin/kube-apiserver
+    dest: /usr/local/bin/kube-apiserver
     owner: root
     group: root
     mode: 0755
@@ -43,7 +43,7 @@
 - name: cp kube-apiserver.service to /lib/systemd/system
   template:
     src: kube-apiserver/kube-apiserver.service.j2
-    dest: /lib/systemd/system/kube-apiserver.service
+    dest: /etc/systemd/system/kube-apiserver.service
     owner: root
     group: root
     mode: 0644

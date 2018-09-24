@@ -1,15 +1,15 @@
-- name: cp kube-controller-manager bin file to /opt/kubernetes/bin
+- name: cp kube-controller-manager bin file to /usr/local/bin
   copy:
     src: kube-controller-manager
-    dest: /opt/kubernetes/bin/kube-controller-manager
+    dest: /usr/local/bin/kube-controller-manager
     owner: root
     group: root
     mode: 0755
 
-- name: cp kube-controller-manager.service to /lib/systemd/system
+- name: cp kube-controller-manager.service to /etc/systemd/system
   template: 
     src: kube-controller-manager/kube-controller-manager.service.j2
-    dest: /lib/systemd/system/kube-controller-manager.service
+    dest: /etc/systemd/system/kube-controller-manager.service
     owner: root
     group: root
     mode: 0644

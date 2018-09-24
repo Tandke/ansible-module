@@ -1,17 +1,17 @@
 ---
 # tasks file for /etc/ansible/roles/etcd
-- name: cp etcd binary to /usr/bin
+- name: cp etcd binary to /usr/local/bin
   copy: 
     src: etcd
-    dest: /usr/bin/etcd
+    dest: /usr/local/bin/etcd
     owner: root
     group: root
     mode: 0755
 
-- name: cp etcdctl binary to /usr/bin
+- name: cp etcdctl binary to /usr/local/bin
   copy: 
     src: etcdctl
-    dest: /usr/bin/etcdctl
+    dest: /usr/local/bin/etcdctl
     owner: root
     group: root
     mode: 0755
@@ -44,10 +44,10 @@
     group: root
     mode: 0644
 
-- name: cp etcd service to /lib/systemd/system
+- name: cp etcd service to /etc/systemd/system
   template:
     src: etcd.service.j2
-    dest: /lib/systemd/system/etcd.service
+    dest: /etc/systemd/system/etcd.service
     owner: root
     group: root
     mode: 0755

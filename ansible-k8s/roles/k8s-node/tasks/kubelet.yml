@@ -4,46 +4,46 @@
     state: directory
 
 - name: test clusterrolebinding
-  shell: /opt/kubernetes/bin/kubectl get clusterrolebinding | grep kubelet-bootstrap
+  shell: /usr/local/bin/kubectl get clusterrolebinding | grep kubelet-bootstrap
   register: result
   ignore_errors: True
 
 - name: cluster role binding
-  shell: /opt/kubernetes/bin/kubectl create clusterrolebinding kubelet-bootstrap --clusterrole=system:node-bootstrapper --user=kubelet-bootstrap
+  shell: /usr/local/bin/kubectl create clusterrolebinding kubelet-bootstrap --clusterrole=system:node-bootstrapper --user=kubelet-bootstrap
   when: result.rc != 0
 
 - name: kubeconfig-set-cluster
-  command: /opt/kubernetes/bin/kubectl config set-cluster kubernetes --certificate-authority=/opt/kubernetes/ssl/ca.pem --embed-certs=true --server=https://{{ MASTER_IP }}:6443 --kubeconfig=bootstrap.kubeconfig
+  command: /usr/local/bin/kubectl config set-cluster kubernetes --certificate-authority=/etc/kubernetes/ssl/ca.pem --embed-certs=true --server=https://{{ MASTER_IP }}:6443 --kubeconfig=bootstrap.kubeconfig
   args:
     chdir: /opt/kubernetes/cfg
 
 - name: kubeconfig-set-credentials
-  command: /opt/kubernetes/bin/kubectl config set-credentials kubelet-bootstrap --token={{ BOOTSTRAP_TOKEN }} --kubeconfig=bootstrap.kubeconfig
+  command: /usr/local/bin/kubectl config set-credentials kubelet-bootstrap --token={{ BOOTSTRAP_TOKEN }} --kubeconfig=bootstrap.kubeconfig
   args:
     chdir: /opt/kubernetes/cfg
 
 - name: kubeconfig-set-context
-  command: /opt/kubernetes/bin/kubectl config set-context default --cluster=kubernetes --user=kubelet-bootstrap --kubeconfig=bootstrap.kubeconfig
+  command: /usr/local/bin/kubectl config set-context default --cluster=kubernetes --user=kubelet-bootstrap --kubeconfig=bootstrap.kubeconfig
   args:
     chdir: /opt/kubernetes/cfg
 
 - name: kubeconfig-use-context
-  command: /opt/kubernetes/bin/kubectl config use-context default --kubeconfig=bootstrap.kubeconfig
+  command: /usr/local/bin/kubectl config use-context default --kubeconfig=bootstrap.kubeconfig
   args:
     chdir: /opt/kubernetes/cfg
 
-- name: cp kubelet bin file to /opt/kubernetes/bin
+- name: cp kubelet bin file to /usr/local/bin
   copy: 
     src: kubelet
-    dest: /opt/kubernetes/bin
+    dest: /usr/local/bin
     owner: root
     group: root
     mode: 0755
 
-- name: cp kubelet.service to /lib/systemd/system
+- name: cp kubelet.service to /etc/systemd/system
   template:
     src: kubelet/kubelet.service.j2
-    dest: /lib/systemd/system/kubelet.service
+    dest: /etc/systemd/system/kubelet.service
     owner: root
     group: root
     mode: 0644

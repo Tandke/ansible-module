@@ -1,17 +1,3 @@
-- name: ensure /opt/kubernetes exsit
-  file: path=/opt/kubernetes state=directory mode=0755 owner=root group=root
+- name: ensure /etc/kubernetes exsit
+  file: path=/etc/kubernetes state=directory mode=0755 owner=root group=root
 
-- name: ensure /opt/kubernetes/bin exsit
-  file: path=/opt/kubernetes/bin state=directory mode=0755 owner=root group=root
-
-- name: ensure /opt/kubernetes/cfg exsit
-  file: path=/opt/kubernetes/cfg state=directory mode=0755 owner=root group=root
-
-- name: ensure /opt/kubernetes/ssl exsit
-  file: path=/opt/kubernetes/ssl state=directory mode=0755 owner=root group=root
-
-- name: ensure /opt/kubernetes/log exsit
-  file: path=/opt/kubernetes/log state=directory mode=0755 owner=root group=root
-- lineinfile:
-    dest: /etc/profile
-    line: 'export PATH=$PATH:/opt/kubernetes/bin'

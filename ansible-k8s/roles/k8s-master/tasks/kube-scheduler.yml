@@ -1,15 +1,15 @@
-- name: cp kube-scheduler bin file to /opt/kubernetes/bin
+- name: cp kube-scheduler bin file to /usr/local/bin
   copy:
     src: kube-scheduler
-    dest: /opt/kubernetes/bin/kube-scheduler
+    dest: /usr/local/bin/kube-scheduler
     owner: root
     group: root
     mode: 0755
 
-- name: cp kube-scheduler.service to /lib/systemd/system
+- name: cp kube-scheduler.service to /etc/systemd/system
   template:
     src: kube-scheduler/kube-scheduler.service.j2
-    dest: /lib/systemd/system/kube-scheduler.service
+    dest: /etc/systemd/system/kube-scheduler.service
     owner: root
     group: root
     mode: 0644

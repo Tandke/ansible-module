@@ -3,15 +3,23 @@
 - name: install coredns
   copy: 
     src: coredns
-    dest: /opt/kubernetes/bin/coredns
+    dest: /usr/local/bin/coredns
     owner: root
     group: root
     mode: 0755
-  
+
+- name: ensure coredns config dir
+  file:
+    path: /etc/coredns
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
 - name: coredns config file
   template:
     src: Corefile.j2
-    dest: /opt/kubernetes/cfg/Corefile
+    dest: /etc/coredns/Corefile
     owner: root
     group: root
     mode: 0644
@@ -20,7 +28,7 @@
 - name: coredns service file
   template:
     src: coredns.service.j2
-    dest: /lib/systemd/system/coredns.service
+    dest: /etc/systemd/system/coredns.service
     owner: root
     group: root
     mode: 0644

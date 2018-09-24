@@ -3,44 +3,44 @@
     path: /var/lib/kube-proxy
     state: directory
 
-- name: cp kube-proxy-csr.json to /opt/kubernetes/ssl
+- name: cp kube-proxy-csr.json to /etc/kubernetes/ssl
   template: 
     src: kube-proxy/kube-proxy-csr.json.j2
-    dest: /opt/kubernetes/ssl/kube-proxy-csr.json
+    dest: /etc/kubernetes/ssl/kube-proxy-csr.json
     owner: root
     group: root
     mode: 0644
 
 - name: generate kube-proxy.pem and kube-proxy-key.pem
-  shell: /opt/kubernetes/bin/cfssl gencert -ca=/opt/kubernetes/ssl/ca.pem -ca-key=/opt/kubernetes/ssl/ca-key.pem -config=/opt/kubernetes/ssl/ca-config.json -profile=kubernetes  kube-proxy-csr.json | /opt/kubernetes/bin/cfssljson -bare kube-proxy
+  shell: /usr/local/bin/cfssl gencert -ca=/etc/kubernetes/ssl/ca.pem -ca-key=/etc/kubernetes/ssl/ca-key.pem -config=/etc/kubernetes/ssl/ca-config.json -profile=kubernetes  kube-proxy-csr.json | /usr/local/bin/cfssljson -bare kube-proxy
   args:
-    chdir: /opt/kubernetes/ssl
-    creates: /opt/kubernetes/ssl/kube-proxy.pem
+    chdir: /etc/kubernetes/ssl
+    creates: /etc/kubernetes/ssl/kube-proxy.pem
 
 - name: kubeproxy-set-cluster
-  command: /opt/kubernetes/bin/kubectl config set-cluster kubernetes --certificate-authority=/opt/kubernetes/ssl/ca.pem --embed-certs=true --server=https://{{ MASTER_IP }}:6443  --kubeconfig=kube-proxy.kubeconfig
+  command: /usr/local/bin/kubectl config set-cluster kubernetes --certificate-authority=/etc/kubernetes/ssl/ca.pem --embed-certs=true --server=https://{{ MASTER_IP }}:6443  --kubeconfig=kube-proxy.kubeconfig
   args:
     chdir: /opt/kubernetes/cfg
 
 - name: kubeproxy-set-credentials
-  command: /opt/kubernetes/bin/kubectl config set-credentials kube-proxy --client-certificate=/opt/kubernetes/ssl/kube-proxy.pem --client-key=/opt/kubernetes/ssl/kube-proxy-key.pem --embed-certs=true --kubeconfig=kube-proxy.kubeconfig
+  command: /usr/local/bin/kubectl config set-credentials kube-proxy --client-certificate=/etc/kubernetes/ssl/kube-proxy.pem --client-key=/etc/kubernetes/ssl/kube-proxy-key.pem --embed-certs=true --kubeconfig=kube-proxy.kubeconfig
   args:
     chdir: /opt/kubernetes/cfg
 
 - name: kubeproxy-set-context
-  command: /opt/kubernetes/bin/kubectl config set-context default --cluster=kubernetes --user=kube-proxy --kubeconfig=kube-proxy.kubeconfig
+  command: /usr/local/bin/kubectl config set-context default --cluster=kubernetes --user=kube-proxy --kubeconfig=kube-proxy.kubeconfig
   args:
     chdir: /opt/kubernetes/cfg
 
 - name: kubeproxy-use-context
-  command: /opt/kubernetes/bin/kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
+  command: /usr/local/bin/kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
   args:
     chdir: /opt/kubernetes/cfg
 
-- name: cp kube-proxy bin file to /opt/kubernetes/bin
+- name: cp kube-proxy bin file to /usr/local/bin
   copy: 
     src: kube-proxy
-    dest: /opt/kubernetes/bin/kube-proxy
+    dest: /usr/local/bin/kube-proxy
     owner: root
     group: root
     mode: 0755
@@ -48,10 +48,10 @@
 - name: load ip_vs
   command: modprobe ip_vs
 
-- name: cp kube-proxy.service to /lib/systemd/system
+- name: cp kube-proxy.service to /etc/systemd/system
   template:
     src: kube-proxy/kube-proxy.service.j2
-    dest: /lib/systemd/system/kube-proxy.service
+    dest: /etc/systemd/system/kube-proxy.service
     owner: root
     group: root
     mode: 0644
