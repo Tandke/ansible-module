@@ -58,7 +58,7 @@
 #  command: systemctl daemon-reload
 
 - name: start etcd
-   systemd :
+  systemd:
     name: etcd
     state: started
     enabled: yes
