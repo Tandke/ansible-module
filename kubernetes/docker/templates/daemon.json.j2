@@ -1,5 +1,5 @@
 {
-{% if {{ NETWORK_PLUGIN}} == "quagga" -%}
+{% if NETWORK_PLUGIN == "quagga" -%}
   "bip": "{{ DOCKER_BIP |default('172.17.0.1/24') }}",
   "ip-masq": {{ DOCKER_IP_MASQ |default('true') }},
 {%- endif -%}
