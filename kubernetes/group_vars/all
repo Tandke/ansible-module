@@ -1,3 +1,6 @@
+# 选择使用的网络插件，目前支持flannel和quagga
+NETWORK_PLUGIN: "flannel"
+
 # 如果使用quagga作为网络插件，AREA用于指定ospf区域
 AREA: 0
 

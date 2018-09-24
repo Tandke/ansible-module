@@ -10,8 +10,8 @@
 
 - name: cluster role binding
   shell: /usr/local/bin/kubectl create clusterrolebinding kubelet-bootstrap --clusterrole=system:node-bootstrapper --user=kubelet-bootstrap
+  run_once: true
   when: result.rc != 0
-
 - name: kubeconfig-set-cluster
   command: /usr/local/bin/kubectl config set-cluster kubernetes --certificate-authority=/etc/kubernetes/ssl/ca.pem --embed-certs=true --server=https://{{ MASTER_IP }}:6443 --kubeconfig=bootstrap.kubeconfig
   args:
