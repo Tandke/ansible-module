@@ -15,26 +15,26 @@
 - name: kubeconfig-set-cluster
   command: /usr/local/bin/kubectl config set-cluster kubernetes --certificate-authority=/etc/kubernetes/ssl/ca.pem --embed-certs=true --server=https://{{ MASTER_IP }}:6443 --kubeconfig=bootstrap.kubeconfig
   args:
-    chdir: /opt/kubernetes/cfg
+    chdir: /etc/kubernetes
 
 - name: kubeconfig-set-credentials
   command: /usr/local/bin/kubectl config set-credentials kubelet-bootstrap --token={{ BOOTSTRAP_TOKEN }} --kubeconfig=bootstrap.kubeconfig
   args:
-    chdir: /opt/kubernetes/cfg
+    chdir: /etc/kubernetes
 
 - name: kubeconfig-set-context
   command: /usr/local/bin/kubectl config set-context default --cluster=kubernetes --user=kubelet-bootstrap --kubeconfig=bootstrap.kubeconfig
   args:
-    chdir: /opt/kubernetes/cfg
+    chdir: /etc/kubernetes
 
 - name: kubeconfig-use-context
   command: /usr/local/bin/kubectl config use-context default --kubeconfig=bootstrap.kubeconfig
   args:
-    chdir: /opt/kubernetes/cfg
+    chdir: /etc/kubernetes
 
 - name: cp kubelet bin file to /usr/local/bin
   copy: 
-    src: kubelet
+    src: k8s-node/kubelet
     dest: /usr/local/bin
     owner: root
     group: root

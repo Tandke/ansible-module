@@ -34,7 +34,7 @@
 
 - name: cp kube-apiserver bin to /usr/local/bin
   copy:
-    src: kube-apiserver
+    src: k8s-master/kube-apiserver
     dest: /usr/local/bin/kube-apiserver
     owner: root
     group: root

@@ -1,6 +1,6 @@
 - name: cp kube-controller-manager bin file to /usr/local/bin
   copy:
-    src: kube-controller-manager
+    src: k8s-master/kube-controller-manager
     dest: /usr/local/bin/kube-controller-manager
     owner: root
     group: root

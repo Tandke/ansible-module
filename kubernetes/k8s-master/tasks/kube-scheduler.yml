@@ -1,6 +1,6 @@
 - name: cp kube-scheduler bin file to /usr/local/bin
   copy:
-    src: kube-scheduler
+    src: k8s-master/kube-scheduler
     dest: /usr/local/bin/kube-scheduler
     owner: root
     group: root

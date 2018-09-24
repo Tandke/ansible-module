@@ -20,26 +20,26 @@
 - name: kubeproxy-set-cluster
   command: /usr/local/bin/kubectl config set-cluster kubernetes --certificate-authority=/etc/kubernetes/ssl/ca.pem --embed-certs=true --server=https://{{ MASTER_IP }}:6443  --kubeconfig=kube-proxy.kubeconfig
   args:
-    chdir: /opt/kubernetes/cfg
+    chdir: /etc/kubernetes
 
 - name: kubeproxy-set-credentials
   command: /usr/local/bin/kubectl config set-credentials kube-proxy --client-certificate=/etc/kubernetes/ssl/kube-proxy.pem --client-key=/etc/kubernetes/ssl/kube-proxy-key.pem --embed-certs=true --kubeconfig=kube-proxy.kubeconfig
   args:
-    chdir: /opt/kubernetes/cfg
+    chdir: /etc/kubernetes
 
 - name: kubeproxy-set-context
   command: /usr/local/bin/kubectl config set-context default --cluster=kubernetes --user=kube-proxy --kubeconfig=kube-proxy.kubeconfig
   args:
-    chdir: /opt/kubernetes/cfg
+    chdir: /etc/kubernetes
 
 - name: kubeproxy-use-context
   command: /usr/local/bin/kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
   args:
-    chdir: /opt/kubernetes/cfg
+    chdir: /etc/kubernetes
 
 - name: cp kube-proxy bin file to /usr/local/bin
   copy: 
-    src: kube-proxy
+    src: k8s-node/kube-proxy
     dest: /usr/local/bin/kube-proxy
     owner: root
     group: root
