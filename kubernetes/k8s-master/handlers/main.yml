@@ -1,19 +1,19 @@
 ---
 # handlers file for /etc/ansible/roles/k8s-master
 - name: restart kube-apiserver
-  service:
+  systemd:
     name: kube-apiserver
     state: restarted
     daemon_reload: yes
 
 - name: restart kube-controller-manager
-  service:
+  systemd:
     name: kube-controller-manager
     state: restarted
     daemon_reload: yes
 
 - name: restart kube-scheduler
-  service:
+  systemd:
     name: kube-scheduler
     state: restarted
     daemon_reload: yes

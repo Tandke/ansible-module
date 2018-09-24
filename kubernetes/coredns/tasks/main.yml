@@ -35,7 +35,7 @@
   notify: restart coredns
 
 - name: start coredns
-  service:
+  systemd:
     name: coredns
     state: started
     enabled: yes

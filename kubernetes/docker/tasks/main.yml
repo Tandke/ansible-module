@@ -66,4 +66,4 @@
 #  command: systemctl daemon-reload
 
 - name: start docker
-  service: name=docker.service state=started enabled=yes daemon_reload=yes
+  systemd: name=docker.service state=started enabled=yes daemon_reload=yes

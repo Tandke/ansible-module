@@ -19,7 +19,7 @@
 #  command: systemctl daemon-reload
 
 - name: start kube-controller-manager
-  service: 
+  systemd: 
     name: kube-controller-manager
     state: started
     enabled: yes

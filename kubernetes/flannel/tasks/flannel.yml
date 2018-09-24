@@ -57,7 +57,7 @@
     - restart docker
 
 - name: start flanneld
-  service: 
+  systemd: 
     name: flanneld 
     state: started 
     enabled: true 

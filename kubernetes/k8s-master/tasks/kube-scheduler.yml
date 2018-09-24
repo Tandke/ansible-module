@@ -19,7 +19,7 @@
 #  command: systemctl daemon-reload
 
 - name:  start kube-scheduler
-  service:
+  systemd:
     name: kube-scheduler
     state: started
     enabled: yes

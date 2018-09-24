@@ -51,7 +51,7 @@
 
 
 - name: start kube-apiserver
-  service: 
+  systemd: 
     name: kube-apiserver
     state: started
     enabled: yes

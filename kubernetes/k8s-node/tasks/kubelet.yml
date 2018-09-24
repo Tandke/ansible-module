@@ -50,7 +50,7 @@
   notify: restart kubelet
 
 - name: start kubelet
-  service:
+  systemd:
     name: kubelet
     state: started
     enabled: yes

@@ -1,7 +1,7 @@
 ---
 # handlers file for /home/yanwei/workspace/ansible-module/ansible-k8s/roles/coredns
 - name: restart coredns
-  service:
+  systemd:
     name: coredns
     state: restarted
     daemon_reload: yes
