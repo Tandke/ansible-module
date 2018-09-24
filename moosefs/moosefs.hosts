@@ -1,0 +1,31 @@
+# The Inventory of moosefs Hosts
+
+# All moosefs groups
+[moosefs_all:children]
+moosefs_master
+moosefs_backup
+moosefs_datanode
+moosefs_client
+
+# Group of moosefs master
+[moosefs_master]
+#mfs-master
+server1
+# Group of moosefs backup server
+[moosefs_backup]
+#mfs-secondary
+server2
+# Group of moosefs datanode servers
+[moosefs_datanode]
+#mfs-node-[1:3]
+server1
+server2
+server3
+server4
+server5
+[moosefs_client]
+server1
+server2
+server3
+server4
+server5

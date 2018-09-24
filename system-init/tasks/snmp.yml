@@ -1,0 +1,12 @@
+---
+
+- name: install net-snmp
+  yum: name=net-snmp state=present
+  tags: 
+    - snmp
+      
+- name: copy snmp configuratios
+  template: src=snmpd.conf.j2 dest=/etc/snmp/snmpd.conf
+  notify:
+    - restart snmp
+
