@@ -2,7 +2,7 @@
 # tasks file for /etc/ansible/roles/etcd
 - name: cp etcd binary to /usr/local/bin
   copy: 
-    src: etcd
+    src: etcd/etcd
     dest: /usr/local/bin/etcd
     owner: root
     group: root
@@ -10,7 +10,7 @@
 
 - name: cp etcdctl binary to /usr/local/bin
   copy: 
-    src: etcdctl
+    src: etcd/etcdctl
     dest: /usr/local/bin/etcdctl
     owner: root
     group: root
