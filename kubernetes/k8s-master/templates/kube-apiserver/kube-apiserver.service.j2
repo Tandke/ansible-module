@@ -6,7 +6,6 @@ After=network.target
 [Service]
 ExecStart=/usr/local/bin/kube-apiserver \
   --admission-control=NamespaceLifecycle,LimitRanger,ServiceAccount,PersistentVolumeLabel,DefaultStorageClass,ResourceQuota,DefaultTolerationSeconds,NodeRestriction \
-  --apiserver-count=3 \
   --bind-address={{ NODE_IP }} \
   --insecure-bind-address=127.0.0.1 \
   --insecure-port=8080 \
